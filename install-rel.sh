@@ -1,5 +1,16 @@
 #!/bin/sh
-./clone.sh
+# ./clone.sh
+
+if [ -d "./oscar" ]; then
+    echo "already cloned"
+else
+    curl "http://jenkins.oscar-emr.com:8080/job/oscar-stable/lastSuccessfulBuild/artifact/*zip*/archive.zip" --output oscar.zip
+    unzip oscar.zip
+    mv archive oscar
+    rm oscar.zip
+    chmod a+x oscar/database/mysql/createdatabase_*.sh
+fi
+
 echo "Setting up database containers. This may take some time...."
 docker-compose -f docker-compose-rel.yml up -d db 
 echo "Waiting for db containers initialize (1 min)"

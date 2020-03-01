@@ -17,7 +17,7 @@ This is an experimental application and is not for production use.
 * Docker-compose
 
 ## How to Use this
-* Just clone this repo and ./install.sh
+* Just clone this repo and ./install-rel.sh
 * Access oscar at http://localhost:8091/oscar_mcmaster/
 
 ## Using external database
