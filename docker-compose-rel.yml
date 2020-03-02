@@ -18,6 +18,7 @@ services:
       - ./dbdump:/docker-entrypoint-initdb.d
       - ./conf/my.cnf:/etc/mysql/my.cnf
       - .:/code
+      - /usr/local/docker-data/oscar-db:/var/lib/mysql
     networks:
       - mt-network
 
@@ -41,6 +42,14 @@ services:
       db_name: "oscar_mcmaster?autoReconnect=true&zeroDateTimeBehavior=round&useOldAliasMetadataBehavior=true&jdbcCompliantTruncation=false"
     depends_on:
       - db
+    networks:
+      - mt-network
+  
+  adminer:
+    restart: "always"
+    image: adminer
+    ports:
+      - 8092:8080
     networks:
       - mt-network
 

@@ -11,12 +11,16 @@ else
     chmod a+x oscar/database/mysql/createdatabase_*.sh
 fi
 
+sudo mkdir -p /usr/local/docker-data/oscar-db
+sudo chmod 777 /usr/local/docker-data/oscar-db
+
 echo "Setting up database containers. This may take some time...."
-docker-compose -f docker-compose-rel.yml up -d db 
+docker-compose -f docker-compose-rel.yml up -d db
 echo "Waiting for db containers initialize (1 min)"
 docker-compose exec db ./code/populate-db.sh
 echo "Bringing up tomcat"
 docker-compose -f docker-compose-rel.yml up -d tomcat_oscar
+docker-compose -f docker-compose-rel.yml up -d adminer
 
 # echo "Waiting for containers to initialize (1 min)"
 # sleep 60

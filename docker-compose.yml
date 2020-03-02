@@ -42,6 +42,14 @@ services:
     networks:
       - mt-network
 
+  adminer:
+    restart: "always"
+    image: adminer
+    ports:
+      - 8092:8080
+    networks:
+      - mt-network
+
 networks:
   mt-network:
     driver: bridge
