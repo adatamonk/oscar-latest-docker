@@ -26,13 +26,17 @@ services:
   # Tomcat container
   tomcat_oscar:
     restart: "always"
+    command: "catalina.sh jpda run"
     build:
       context: .
       dockerfile: Dockerfile-rel
     image: beapen/oscar_15c
     ports:
-        - "8091:8080"  #HOST:CONTAINER
+        - 8091:8080  #HOST:CONTAINER
+        - 8090:8000
     environment:
+      JPDA_ADDRESS: 8000
+      JPDA_TRANSPORT: dt_socket
       JDBC_URL: "jdbc:mysql://db:3306/oscar_mcmaster?autoReconnect=true&zeroDateTimeBehavior=round&useOldAliasMetadataBehavior=true&jdbcCompliantTruncation=false"
       JDBC_USER: root
       JDBC_PASS: liyi
